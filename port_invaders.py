@@ -38,6 +38,58 @@ level = 1
 score = 0
 common_ports = [22, 80, 443, 21, 25, 110, 143, 161, 162, 389, 636, 989, 990]
 
+port_names = {
+    20: "FTP",
+    21: "FTP",
+    22: "SSH",
+    23: "Telnet",
+    25: "SMTP",
+    53: "DNS",
+    80: "HTTP",
+    110: "POP3",
+    143: "IMAP",
+    443: "HTTPS",
+    465: "SMTPS",
+    587: "SMTP",
+    993: "IMAPS",
+    995: "POP3S",
+    3306: "MySQL",
+    3389: "RDP",
+    5432: "PostgreSQL",
+    27017: "MongoDB",
+    22: "SFTP",
+    161: "SNMP",
+    162: "SNMP Trap",
+    389: "LDAP",
+    636: "LDAPS",
+    989: "FTPS Data",
+    990: "FTPS Control",
+    2049: "NFS",
+    3690: "SVN",
+    22: "SCP",
+    873: "RSYNC",
+    6660: "IRC",
+    6667: "IRC SSL",
+    6697: "IRC SSL",
+    9418: "Git",
+    1194: "OpenVPN",
+    1723: "PPTP",
+    5060: "SIP",
+    514: "Syslog",
+    1080: "SOCKS Proxy",
+    3128: "HTTP Proxy",
+    8080: "HTTP Proxy",
+    8081: "HTTP Proxy",
+    21: "FTPS",
+    137: "NetBIOS",
+    139: "NetBIOS",
+    445: "SMB/CIFS",
+    514: "Shell",
+    135: "MS RPC",
+    1433: "MSSQL",
+    1521: "Oracle SQL"
+}
+
 while True:
     start_time = time.time()
     player_pos = [SCREEN_WIDTH // 2, SCREEN_HEIGHT - 2 * PLAYER_SIZE]
@@ -60,9 +112,9 @@ while True:
         # Move player
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            player_pos[0] -= 5
+            player_pos[0] -= 10
         if keys[pygame.K_RIGHT]:
-            player_pos[0] += 5
+            player_pos[0] += 10
 
         # Generate random enemies
         if random.randint(1, 20) == 20:
@@ -133,11 +185,11 @@ while True:
         # Draw allowed using image and display port numbers
         for allow in allowed:
             screen.blit(allowed_image, (allow[0], allow[1]))
-            display_text(str(allow[2]), (allow[0] + 20, allow[1] + 20), screen, font, color=(0, 0, 0))
+            display_text(str(allow[2]), (allow[0] + 10, allow[1] + 55), screen, font, color=(255, 255, 255))
 
         # Draw score and allowed ports
         display_text(f"Score: {score}", [30, 30], screen, font)
-        display_text(f"Allowed Ports: {allowed_ports}", [30, 60], screen, font)
+        display_text(f"Allowed Ports: {allowed_ports} - {[port_names[port] for port in allowed_ports]}", [30, 60], screen, font)
 
         pygame.display.flip()
         clock.tick(30)
@@ -148,6 +200,7 @@ while True:
     display_text(f"Score: {score}", [300, 300], screen, font)
     display_text("Press any key to continue...", [200, 350], screen, font)
     pygame.display.update()
+    time.sleep(3)
 
     while True:
         for event in pygame.event.get():
