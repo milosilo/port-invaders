@@ -1,4 +1,4 @@
-# Port Invaders: Learn Networking Ports Through Gaming 🚀
+# Port Invaders: Learn Network Ports Through Gaming 🚀
 
 ![Port Invaders](https://i.redd.it/kviy1a3vh5mb1.png)
 
